@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Alata&family=Chivo&family=Montserrat:wght@400;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -16,12 +17,23 @@
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+input{
+  @apply w-[370px] rounded-[5px] border-b-verde border-b-[3px] font-alata text-[24px] px-4 h-16 focus:outline-none;
+}
+
+.linhas{
+  @apply h-16 flex items-center justify-center p-2 border-y-2 border-x-2 border-verde rounded-md font-montserrat text-[16px] focus:outline-none;
+}
+
+.botao{
+  @apply bg-branco text-verde rounded-full w-8 h-8;
+}
+
+.relatorio{
+  @apply bg-verde text-branco rounded-md;
+}
+
+
+.titulo{
+  @apply w-full p-6 bg-verde text-branco flex justify-between items-center rounded-md text-[24px] font-alata;
 }
