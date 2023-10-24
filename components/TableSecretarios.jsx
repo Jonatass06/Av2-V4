@@ -10,7 +10,7 @@ export default  function TableSecretarios({ secretarios }) {
     }
 
     return (
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-1  w-full">
             <div className="titulo">
                 Secretarios
                 <button className="botao" onClick={() => setMostrarCadastro(true)}><Image className=" invert" width={16} height={16} alt="adicionar" src="/mais.png"/></button>

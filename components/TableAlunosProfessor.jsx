@@ -16,7 +16,7 @@ export default  function TableAlunosProfessor({ professor, atualizar }) {
 
 
     return (
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-1  w-full">
             <div className="titulo">Alunos</div>
             <div className="flex flex-col gap-1">
                 {alunos.map(aluno => {

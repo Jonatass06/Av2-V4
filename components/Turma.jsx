@@ -9,7 +9,7 @@ import BoletinsSecretario from "./BoletinsSecretario";
 import { useRouter } from "next/router";
 import Image from "next/image";
 
-export default function Turma ({ turmaData, professor }) {
+export default function Turma({ turmaData, professor }) {
     const [alunos, setAlunos] = useState([])
     const id = useRouter().query.id;
 
@@ -54,7 +54,7 @@ export default function Turma ({ turmaData, professor }) {
     }
 
     async function verRelatorio() {
-        if(!professor){
+        if (!professor) {
             const user = await GetDataId(id, "usuario");
             user.qtdBoletins = user.qtdBoletins + 1;
             await PutData(user, "secretario");
@@ -63,10 +63,10 @@ export default function Turma ({ turmaData, professor }) {
     }
 
     return (
-        <div  className="flex h-full gap-1">
-            <div className="linhas w-16">{turma.id}</div>
-            <div>
-                <div className="linhas" onClick={() => setMostrarA(!mostrarAlunos)}>
+        <div className="flex h-full w-full gap-1">
+            <div className="linhas w-min">{turma.id}</div>
+            <div className="w-full">
+                <div className="linhas w-full" onClick={() => setMostrarA(!mostrarAlunos)}>
                     Alunos
                 </div>
                 {mostrarAlunos && <Nomes objs={alunos} deletar={id => deletar(id, "aluno")}></Nomes>}
@@ -74,12 +74,14 @@ export default function Turma ({ turmaData, professor }) {
             {
                 !professor &&
                 <div>
-                    <div onClick={() => setMostrarD(!mostrarDisciplinas)} className="linhas w-[138px]">
+                    <div onClick={() => setMostrarD(!mostrarDisciplinas)} className="linhas w-[138px] gap-2">
                         Disciplinas
                         {
                             disciplinas.length > 0 &&
                             <div className="relative">
-                                <button className="botao" onClick={() => setMostrarCD(!mostrarCadastroD)}>+</button>
+                                <button className="botao" onClick={() => setMostrarCD(!mostrarCadastroD)}>
+                                    <Image className="invert" width={12} height={12} alt="adicionar" src="/mais.png" />
+                                </button>
                                 {mostrarCadastroD &&
                                     <DisciplinaCadastro turma={turma} postDisciplina={id => postDisciplina(id)}></DisciplinaCadastro>
                                 }
@@ -89,7 +91,9 @@ export default function Turma ({ turmaData, professor }) {
                     {mostrarDisciplinas && <Nomes objs={turma.disciplinas} deletar={id => deletar(id, "disciplina")}></Nomes>}
                 </div>
             }
-            <button className="relatorio p-2 h-16" onClick={() => verRelatorio()}><Image className="invert" width={32} height={32} alt="relatorio" src="/relatorio.png"/></button>
+            <button className="relatorio h-16 flex justify-center items-center w-32" onClick={() => verRelatorio()}>
+                <Image className="invert" width={32} height={32} alt="relatorio" src="/relatorio.png" />
+                </button>
             {relatorio &&
                 (professor ?
                     <BoletimProfessor professor={professor} turma={turma}></BoletimProfessor>

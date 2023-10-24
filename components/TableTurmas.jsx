@@ -25,14 +25,14 @@ export default function TableTurmas (props) {
     }
 
     return (
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-1 w-full">
             <div className="titulo">Turmas
                 {!professor &&
                     <button className="botao" onClick={() => post()}><Image className=" invert" width={16} height={16} alt="adicionar" src="/mais.png"/></button>}
             </div>
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col gap-1 w-full">
                 {turmas.map(turma => {
-                        return <div  key={turma.id} className="flex gap-2 items-start">
+                        return <div  key={turma.id} className="flex gap-2 items-start w-full">
                             <Turma turmaData={turma} professor={professor} />
                             {!professor && <button className="linhas w-min text-red-800" onClick={() => deletar(turma)}>x</button>}
                         </div>

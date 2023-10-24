@@ -21,7 +21,7 @@ export default  function TableDisciplinas ({ disciplinas }) {
     }
 
     return (
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-1  w-full">
             <div className="titulo">
                 Disciplinas
                 <button className="botao" onClick={() => post()}><Image className=" invert" width={16} height={16} alt="adicionar" src="/mais.png"/></button>

@@ -15,7 +15,7 @@ export default  function TableAlunos({ alunos, turmas }) {
         PutData(aluno, "aluno")
     }
     return (
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-1 w-full">
             <div className="titulo">
                 Alunos
                 <button className="botao" onClick={() => setMostrarCadastro(true)}><Image className=" invert" width={16} height={16} alt="adicionar" src="/mais.png"/></button>

@@ -20,7 +20,7 @@ export default function TableDisciplinasAluno({ aluno }) {
     }, [aluno])
 
     return (
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-1  w-full">
             <div className="titulo gap-16">
                 {console.log(disciplinas)}
                 <div className="h-full">

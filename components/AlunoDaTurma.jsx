@@ -37,8 +37,8 @@ export default function AlunoDaTurma({ aluno, professor, atualizar }) {
 
     return (
         <div className="flex gap-1">
-            <div className="linhas">{aluno.nome}</div>
-            <div className="linhas w-full">{aluno.turma.id}</div>
+            <div className="linhas w-full">{aluno.nome}</div>
+            <div className="linhas w-min">{aluno.turma.id}</div>
             <div>
                 <div>
                     <div className="linhas w-28 flex gap-2" onClick={() => setMostrarN(!mostrarNotas)}>
