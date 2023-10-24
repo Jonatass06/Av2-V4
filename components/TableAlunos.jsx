@@ -9,6 +9,7 @@ export default  function TableAlunos({ alunos, turmas }) {
     const [mostrarCadastro, setMostrarCadastro] = useState(false);
     function post(obj) {
         PostData(obj, "aluno")
+        setMostrarCadastro(false)
     }
     function put(aluno, value) {
         aluno.turma = { "id": parseInt(value) };
@@ -37,7 +38,7 @@ export default  function TableAlunos({ alunos, turmas }) {
                 })}
             </div>
             {mostrarCadastro &&
-                <ModalCadastro post={obj => post(obj)} />
+                <ModalCadastro post={obj => post(obj)} fechar={() => setMostrarCadastro(false)}/>
             }
         </div>
     )

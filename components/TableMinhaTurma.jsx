@@ -2,7 +2,7 @@
 import alunosDaTurma from "@/data/alunosDaTurma"
 import { useEffect, useState } from "react";
 
-export default  function TableMinhaTurma({ turma }) {
+export default function TableMinhaTurma({ turma }) {
     const [alunos, setAlunos] = useState([])
 
     useEffect(() => {
@@ -16,17 +16,17 @@ export default  function TableMinhaTurma({ turma }) {
 
     return (
         <div className="flex flex-col gap-1  w-full">
-            <div className="titulo">Minha Turma : {turma.id}</div>
+            <div className="titulo">Minha Turma : {turma == null ? "N / A ": turma.id}</div>
             <div>
                 {
                     turma != undefined &&
-                        <div  className="flex flex-col gap-1">
-                            {alunos.map(aluno => {
-                                return <div key={aluno.id} className="linhas">
-                                    <div>{aluno.nome}</div>
-                                </div>
-                            })}
-                        </div>
+                    <div className="flex flex-col gap-1">
+                        {alunos.map(aluno => {
+                            return <div key={aluno.id} className="linhas">
+                                <div>{aluno.nome}</div>
+                            </div>
+                        })}
+                    </div>
                 }
             </div>
         </div>

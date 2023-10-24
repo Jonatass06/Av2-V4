@@ -34,8 +34,11 @@ export default function ConfigsUser () {
     }, [index])
 
     async function deletar() {
+        document.cookie ='logado=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/usuario';
+        document.cookie ='logado=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/';
         let tabela = await getTabela(usuario)
         await DeleteData(index, tabela)
+        router.push("/login")
     }
 
     async function atualizar() {

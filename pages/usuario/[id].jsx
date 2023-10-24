@@ -87,7 +87,7 @@ export default function User() {
                 <div className="w-4/5 gap-6 flex justify-center">
                     <TableAlunos alunos={alunos} turmas={turmas}></TableAlunos>
                     <TableTurmas turmas={turmas}></TableTurmas>
-                    <TableProfessores professores={professores} disciplinas={disciplinas}></TableProfessores>
+                    <TableProfessores professores={professores}></TableProfessores>
                     <TableDisciplinas disciplinas={disciplinas}></TableDisciplinas>
                     <TableSecretarios secretarios={secretarios}></TableSecretarios>
                 </div>

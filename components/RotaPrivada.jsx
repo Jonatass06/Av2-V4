@@ -14,8 +14,9 @@ export default function PrivateRoute({ children, id }) {
             }
         }
         if (!autenticado) {
+            router.push("/login")
         }
-    }, [autenticado]);
+    }, [id]);
 
     return (<div className='w-screen flex flex-col items-center'>
         {children}

@@ -1,12 +1,15 @@
 import { useState } from "react";
 import ModalCadastro from "./ModalCadastro"
 import Image from "next/image";
+import { PostData } from "@/pages/api/hello";
 
 export default  function TableSecretarios({ secretarios }) {
 
     const [mostrarCadastro, setMostrarCadastro] = useState(false);
     function post(obj) {
         PostData(obj, "secretario")
+        setMostrarCadastro(false)
+
     }
 
     return (
@@ -24,7 +27,7 @@ export default  function TableSecretarios({ secretarios }) {
                 })}
             </div>
             {mostrarCadastro &&
-                <ModalCadastro post={obj => post(obj)}></ModalCadastro>}
+                <ModalCadastro post={obj => post(obj)} fechar={() => setMostrarCadastro(false)}></ModalCadastro>}
 
         </div>
     )

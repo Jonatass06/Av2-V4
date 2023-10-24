@@ -1,15 +1,26 @@
 import { PostData } from "@/pages/api/hello"
 import ModalCadastro from "./ModalCadastro"
 import DisciplinaProfessor from "./DisciplinaProfessor"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
+import disciplinasNaoProfData from "@/data/disciplinasSemProfessor";
 
-export default  function TableProfessores({ professores, disciplinas }) {
+export default  function TableProfessores({ professores }) {
 
     const [mostrarCadastro, setMostrarCadastro] = useState(false);
+    const [disciplinasNaoProf, setDisciplnasNaoProf] = useState([]);
+
+    useEffect(() => {
+        async function setDisciplinas(){
+            let discipinasTemp = await disciplinasNaoProfData;
+            setDisciplnasNaoProf(discipinasTemp)
+        }
+        setDisciplinas(0)
+    }, [])
 
     function post(obj) {
         PostData(obj, "professor")
+        setMostrarCadastro(false)
     }
     return (
         <div className="flex flex-col gap-1  w-full">
@@ -18,11 +29,11 @@ export default  function TableProfessores({ professores, disciplinas }) {
             </div>
             <div  className="flex flex-col gap-1">
                 {professores.map(professor => {
-                    return <DisciplinaProfessor key={professor.id} professor={professor} disciplinas={disciplinas} />
+                    return <DisciplinaProfessor key={professor.id} professor={professor} disciplinas={disciplinasNaoProf} />
                 })}
             </div>
             {mostrarCadastro &&
-                <ModalCadastro post={obj => post(obj)}></ModalCadastro>}
+                <ModalCadastro post={obj => post(obj)} fechar={() => setMostrarCadastro(false)}></ModalCadastro>}
         </div>
     )
 }
