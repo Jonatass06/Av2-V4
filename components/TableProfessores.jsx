@@ -2,6 +2,7 @@ import { PostData } from "@/pages/api/hello"
 import ModalCadastro from "./ModalCadastro"
 import DisciplinaProfessor from "./DisciplinaProfessor"
 import { useState } from "react";
+import Image from "next/image";
 
 export default  function TableProfessores({ professores, disciplinas }) {
 
@@ -13,7 +14,7 @@ export default  function TableProfessores({ professores, disciplinas }) {
     return (
         <div className="flex flex-col gap-1">
             <div className="titulo">Professores
-                <button className="botao" onClick={() => setMostrarCadastro(true)}>+</button>
+                <button className="botao" onClick={() => setMostrarCadastro(true)}><Image className=" invert" width={16} height={16} alt="adicionar" src="/mais.png"/></button>
             </div>
             <div  className="flex flex-col gap-1">
                 {professores.map(professor => {

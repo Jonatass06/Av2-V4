@@ -22,8 +22,8 @@ export default  function Notas ({ prova, professor}) {
         <>
             {
                 prova.disciplina.id == professor.disciplina.id &&
-                <div>
-                    <input max={10} min={0} type="number" value={nota} onChange={e => setNota(e.target.value)} onBlur={() => postNota()}/>
+                <div className="w-full">
+                    <input max={10} min={0} type="number"className="w-full border-y-2 border-x-2 border-verde text-[16px] h-8" value={nota} onChange={e => setNota(e.target.value)} onBlur={() => postNota()}/>
                 </div>
             }
         </>

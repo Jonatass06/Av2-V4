@@ -1,4 +1,4 @@
-import GetAllData,{GetDataId }from "@/pages/api/hello";
+import GetAllData, { GetDataId } from "@/pages/api/hello";
 import Header from "@/components/Header";
 import RotaPrivada from "@/components/RotaPrivada"
 import TableAlunos from "@/components/TableAlunos";
@@ -18,7 +18,7 @@ import disciplinasData from "@/data/disciplinas";
 import turmasDoProfessor from "@/data/turmasDoProfessor";
 import TableSecretarios from "@/components/TableSecretarios";
 
-export default function User (){
+export default function User() {
     const id = useRouter().query.id;
     const [secretarios, setSecretarios] = useState([]);
     const [alunos, setAlunos] = useState([]);
@@ -26,13 +26,13 @@ export default function User (){
     const [turmas, setTurmas] = useState([]);
     const [disciplinas, setDisciplinas] = useState([]);
     const [usuario, setUsuario] = useState({});
-    const[isProf, setIsProf] = useState(false);
-    const[isAluno, setIsAluno] = useState(false);
-    const[isSecretario, setIsSecretario] = useState(false);
+    const [isProf, setIsProf] = useState(false);
+    const [isAluno, setIsAluno] = useState(false);
+    const [isSecretario, setIsSecretario] = useState(false);
 
     useEffect(() => {
         async function getUsuario() {
-            if(id == undefined) return
+            if (id == undefined) return
             let usuarioTemp = await GetDataId(id, "usuario")
             setUsuario(usuarioTemp)
 
@@ -47,23 +47,25 @@ export default function User (){
 
             setDisciplinas(await disciplinasData);
 
-            let professor = contem(usuario, professoresTemp)
-            setIsAluno(contem(usuario, alunosTemp));
+            let professor = contem(usuarioTemp, professoresTemp)
+            setIsAluno(contem(usuarioTemp, alunosTemp));
             setIsProf(professor);
-            setIsSecretario(contem(usuario, secretariosTemp));
+            setIsSecretario(contem(usuarioTemp, secretariosTemp));
 
 
-            if(professor){
-                console.log(usuarioTemp)
-                setTurmas(usuarioTemp.disciplina == null  ? [] : await turmasDoProfessor(usuarioTemp.disciplina))
-            }else{
+            console.log(usuarioTemp)
+            if (professor) {
+                setTurmas(usuarioTemp.disciplina == null ? [] : await turmasDoProfessor(usuarioTemp.disciplina))
+
+            }
+            else {
                 setTurmas(await GetAllData("turma"))
             }
         }
         getUsuario();
     }, [id])
 
-    return(
+    return (
         <RotaPrivada id={id}>
             <Header id={id}></Header>
             {
@@ -74,7 +76,7 @@ export default function User (){
                 </div>
             }
             {
-                 isProf &&
+                isProf &&
                 <div className="w-4/5 gap-6 flex justify-center">
                     <TableTurmas professor={usuario} turmas={turmas}></TableTurmas>
                     <TableAlunosProfessor professor={usuario} atualizar={() => setUsuario(usuario)}></TableAlunosProfessor>

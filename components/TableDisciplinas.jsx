@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import Image from "next/image"
 import Disciplina from "./Disciplina"
 import GetAllData, { DeleteData, PostData } from "@/pages/api/hello"
 
@@ -23,7 +24,7 @@ export default  function TableDisciplinas ({ disciplinas }) {
         <div className="flex flex-col gap-1">
             <div className="titulo">
                 Disciplinas
-                <button className="botao" onClick={() => post()}>+</button>
+                <button className="botao" onClick={() => post()}><Image className=" invert" width={16} height={16} alt="adicionar" src="/mais.png"/></button>
             </div>
             <div  className="flex flex-col gap-1">
                 {materias.map(disciplina => {

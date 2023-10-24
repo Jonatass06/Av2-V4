@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import GetAllData, { DeleteData, PostData } from "@/pages/api/hello";
 import Turma from "./Turma";
+import Image from "next/image";
 
 export default function TableTurmas (props) {
     const professor = props.professor;
@@ -27,11 +28,11 @@ export default function TableTurmas (props) {
         <div className="flex flex-col gap-1">
             <div className="titulo">Turmas
                 {!professor &&
-                    <button className="botao" onClick={() => post()}>+</button>}
+                    <button className="botao" onClick={() => post()}><Image className=" invert" width={16} height={16} alt="adicionar" src="/mais.png"/></button>}
             </div>
             <div className="flex flex-col gap-1">
                 {turmas.map(turma => {
-                        return <div  key={turma.id} className="flex gap-2 items-center">
+                        return <div  key={turma.id} className="flex gap-2 items-start">
                             <Turma turmaData={turma} professor={professor} />
                             {!professor && <button className="linhas w-min text-red-800" onClick={() => deletar(turma)}>x</button>}
                         </div>

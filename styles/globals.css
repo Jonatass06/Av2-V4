@@ -26,7 +26,7 @@ input{
 }
 
 .botao{
-  @apply bg-branco text-verde rounded-full w-8 h-8;
+  @apply bg-verde rounded-full w-8 h-8 flex items-center justify-center border-y-2 border-x-2 border-branco;
 }
 
 .relatorio{
@@ -35,5 +35,5 @@ input{
 
 
 .titulo{
-  @apply w-full p-6 bg-verde text-branco flex justify-between items-center rounded-md text-[24px] font-alata;
+  @apply w-full p-6 bg-verde text-branco flex justify-between items-center rounded-md text-[24px] h-20 font-alata;
 }

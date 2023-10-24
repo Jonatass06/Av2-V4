@@ -7,6 +7,7 @@ import disciplinasNaoTurma from "@/data/disciplinasNaoTurma";
 import BoletimProfessor from "./BoletimProfessor";
 import BoletinsSecretario from "./BoletinsSecretario";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 export default function Turma ({ turmaData, professor }) {
     const [alunos, setAlunos] = useState([])
@@ -88,7 +89,7 @@ export default function Turma ({ turmaData, professor }) {
                     {mostrarDisciplinas && <Nomes objs={turma.disciplinas} deletar={id => deletar(id, "disciplina")}></Nomes>}
                 </div>
             }
-            <button className="relatorio p-2 h-full" onClick={() => verRelatorio()}>Relatorio</button>
+            <button className="relatorio p-2 h-16" onClick={() => verRelatorio()}><Image className="invert" width={32} height={32} alt="relatorio" src="/relatorio.png"/></button>
             {relatorio &&
                 (professor ?
                     <BoletimProfessor professor={professor} turma={turma}></BoletimProfessor>

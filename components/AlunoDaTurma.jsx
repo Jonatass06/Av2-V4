@@ -2,8 +2,9 @@ import provasDoAluno from "@/data/provasDoAluno";
 import { DeleteData, PostData } from "@/pages/api/hello";
 import { useEffect, useState } from "react";
 import Notas from "./Notas";
+import Image from "next/image";
 
-export default  function AlunoDaTurma({aluno, professor, atualizar}) {
+export default function AlunoDaTurma({ aluno, professor, atualizar }) {
 
     const [mostrarNotas, setMostrarN] = useState(false)
     const [provas, setProvas] = useState([])
@@ -25,8 +26,8 @@ export default  function AlunoDaTurma({aluno, professor, atualizar}) {
                 "aluno": { "id": aluno.id }
             }
             , "prova")
-            setProvas(await provasDoAluno(aluno))
-            atualizar()
+        setProvas(await provasDoAluno(aluno))
+        atualizar()
     }
 
     async function deletarNota(prova) {
@@ -35,22 +36,24 @@ export default  function AlunoDaTurma({aluno, professor, atualizar}) {
     }
 
     return (
-        <div  className="flex">
-            <div className="linha">{aluno.nome}</div>
-            <div className="linha">{aluno.turma.id}</div>
+        <div className="flex gap-1">
+            <div className="linhas">{aluno.nome}</div>
+            <div className="linhas w-full">{aluno.turma.id}</div>
             <div>
                 <div>
-                    <div className="linha"  onClick={() => setMostrarN(!mostrarNotas)}>
+                    <div className="linhas w-28 flex gap-2" onClick={() => setMostrarN(!mostrarNotas)}>
                         Notas
-                        <button className="botao" onClick={() => { postNota(aluno) }}>+</button>
+                        <button className="botao" onClick={() => { postNota(aluno) }}>
+                            <Image className="invert" width={12} height={12} alt="adicionar" src="/mais.png" />
+                        </button>
                     </div>
 
                     {mostrarNotas &&
                         <div className="flex flex-col">
                             {provas.map(prova => {
-                                return <div key={prova.id} className="flex">
+                                return <div key={prova.id} className="flex w-28">
                                     <Notas prova={prova} professor={professor} />
-                                    <button className="text-red-800" onClick={() => deletarNota(prova)}>x</button>
+                                    <button className="border-y-2 border-x-2 rounded-full h-8 w-12 border-verde text-red-800" onClick={() => deletarNota(prova)}>x</button>
                                 </div>
                             })}
                         </div>
@@ -58,5 +61,5 @@ export default  function AlunoDaTurma({aluno, professor, atualizar}) {
                 </div>
             </div>
         </div>
-        )
+    )
 }

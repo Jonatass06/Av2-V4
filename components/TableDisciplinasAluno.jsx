@@ -1,6 +1,7 @@
 
 import { GetDataId } from "@/pages/api/hello";
 import { useEffect, useState } from "react";
+import professorDaDisciplina from "@/data/professorDaDisciplina"
 import BoletimAluno from "./BoletimAluno";
 
 export default function TableDisciplinasAluno({ aluno }) {
@@ -9,20 +10,23 @@ export default function TableDisciplinasAluno({ aluno }) {
     const [relatorio, setRelatorio] = useState(false);
     useEffect(() => {
         async function getTurma() {
-            setDisciplinas(aluno.turma == null ? [] : await GetDataId(aluno.turma.id, "turma").disciplinas);
+            let disciplinas = aluno.turma == null ? [] : (await GetDataId(aluno.turma.id, "turma")).disciplinas
+            for(let d of disciplinas){
+                await professorDaDisciplina(d);
+            }
+            setDisciplinas(disciplinas);
         }
         getTurma()
     }, [aluno])
 
-
-
     return (
-        <div>
-            <div className="titulo">
-                <div>
-                    Alunos
+        <div className="flex flex-col gap-1">
+            <div className="titulo gap-16">
+                {console.log(disciplinas)}
+                <div className="h-full">
+                    Disciplinas
                 </div>
-                <button className="w-1/4 border-l-branco "
+                <button className="w-max h-full pl-4 border-l-2 border-branco flex items-center justify-center font-montserrat text-[16px] "
                     onClick={() => setRelatorio(true)}>
                     Gerar Relatório
                 </button>
@@ -32,11 +36,11 @@ export default function TableDisciplinasAluno({ aluno }) {
                     </div>
                 }
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col gap-1">
                 {disciplinas.map(disciplina => {
-                    return <div key={disciplina.id} className="flex">
-                        <div className="linha">{disciplina.nome}</div>
-                        <div className="linha">
+                    return <div key={disciplina.id} className="flex gap-1">
+                        <div className="linhas w-full ">{disciplina.nome}</div>
+                        <div className="linhas w-full">
                             <div onClick={() => setMostrarN(true)}>
                                 Notas
                             </div>
@@ -52,8 +56,8 @@ export default function TableDisciplinasAluno({ aluno }) {
                                 </div>
                             }
                         </div>
-                        <div className="linha">{disciplina.cargaHoraria}</div>
-                        <div className="linha">{disciplina.professor}</div>
+                        <div className="linhas w-min">{disciplina.cargaHoraria}</div>
+                        <div className="linhas w-full">{disciplina.professor}</div>
                     </div>
                 })}
             </div>

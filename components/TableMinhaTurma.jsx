@@ -7,7 +7,7 @@ export default  function TableMinhaTurma({ turma }) {
 
     useEffect(() => {
         async function getAlunos() {
-            const alunos = await alunosDaTurma(turma);
+            const alunos = turma == null ? [] : await alunosDaTurma(turma);
             console.log(alunos)
             setAlunos(alunos)
         }
@@ -15,21 +15,18 @@ export default  function TableMinhaTurma({ turma }) {
     }, [turma])
 
     return (
-        <div>
-            <div className="titulo">Minha Turma</div>
+        <div className="flex flex-col gap-1">
+            <div className="titulo">Minha Turma : {turma.id}</div>
             <div>
                 {
                     turma != undefined &&
-                    <div className="flex flex-col">
-                        <div className="titulo bg-branco text-verde border-verde rounded-sm">{turma.id}</div>
-                        <div  className="flex flex-col">
+                        <div  className="flex flex-col gap-1">
                             {alunos.map(aluno => {
-                                return <div key={aluno.id} className="linha">
+                                return <div key={aluno.id} className="linhas">
                                     <div>{aluno.nome}</div>
                                 </div>
                             })}
                         </div>
-                    </div>
                 }
             </div>
         </div>

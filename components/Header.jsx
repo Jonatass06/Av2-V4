@@ -11,7 +11,7 @@ export default  function Header({id}) {
     return (
         <>
 
-            <header className="w-full bg-verde h-[60px] flex justify-between items-center">
+            <header className="w-full bg-verde h-[60px] flex justify-between items-center mb-24">
                 <div className="w-[88%] h-full flex ml-5 justify-start gap-5 items-center">
                     <Image width={48} height={48} alt="Logo" src="/logoAv2.svg" />
                     <h2 className="text-branco font-chivo font-bold">Arnaldo Vieira II</h2>
