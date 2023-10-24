@@ -9,7 +9,7 @@ import BoletinsSecretario from "./BoletinsSecretario";
 import { useRouter } from "next/router";
 import Image from "next/image";
 
-export default function Turma({ turmaData, professor }) {
+export default function Turma({ turmaData, professor, atualizar }) {
     const [alunos, setAlunos] = useState([])
     const id = useRouter().query.id;
 
@@ -35,6 +35,7 @@ export default function Turma({ turmaData, professor }) {
         await PutData(turma, "turma");
         setTurma(await GetDataId(turma.id, 'turma'))
         setDisciplinas(await disciplinasNaoTurma(turma))
+        props.atualizar()
     }
 
     async function deletar(id, tabela) {
@@ -51,6 +52,7 @@ export default function Turma({ turmaData, professor }) {
         setTurma(await GetDataId(turma.id, 'turma'))
         setAlunos(await alunosDaTurma(turma))
         setDisciplinas(await disciplinasNaoTurma(turma))
+        props.atualizar()
     }
 
     async function verRelatorio() {
@@ -98,7 +100,7 @@ export default function Turma({ turmaData, professor }) {
                 (professor ?
                     <BoletimProfessor professor={professor} turma={turma}></BoletimProfessor>
                     :
-                    <BoletinsSecretario alunosData={alunos}></BoletinsSecretario>)
+                    <div className="h-3/4 gap-6 overflow-clip"><BoletinsSecretario alunosData={alunos}></BoletinsSecretario></div>)
             }
         </div>
     )

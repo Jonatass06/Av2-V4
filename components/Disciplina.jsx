@@ -1,7 +1,7 @@
 import { PutData } from "@/pages/api/hello";
 import { useEffect, useState } from "react";
 
-export default  function Disciplina({ disciplina }) {
+export default  function Disciplina({ disciplina, atualizar }) {
     const [nome, setNome] = useState("");
     const [carga, setCarga] = useState("");
 
@@ -18,6 +18,7 @@ export default  function Disciplina({ disciplina }) {
             "cargaHoraria": parseFloat(carga)
         }
         await PutData(obj, "disciplina")
+        atualizar()
     }
 
     return (

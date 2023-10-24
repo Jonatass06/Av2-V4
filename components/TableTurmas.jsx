@@ -18,10 +18,12 @@ export default function TableTurmas (props) {
     async function post() {
         await PostData({}, "turma");
         setTurmas(await GetAllData("turma"))
+        props.atualizar()
     }
     async function deletar(turma) {
         await DeleteData(turma.id, "turma");
         setTurmas(await GetAllData("turma"));
+        props.atualizar()
     }
 
     return (
@@ -33,7 +35,7 @@ export default function TableTurmas (props) {
             <div className="flex flex-col gap-1 w-full">
                 {turmas.map(turma => {
                         return <div  key={turma.id} className="flex gap-2 items-start w-full">
-                            <Turma turmaData={turma} professor={professor} />
+                            <Turma turmaData={turma} atualizar={() => props.atualizar()} professor={professor} />
                             {!professor && <button className="linhas w-min text-red-800" onClick={() => deletar(turma)}>x</button>}
                         </div>
                     })}

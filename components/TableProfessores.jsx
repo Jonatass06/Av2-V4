@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import disciplinasNaoProfData from "@/data/disciplinasSemProfessor";
 
-export default  function TableProfessores({ professores }) {
+export default  function TableProfessores({ professores, atualizar }) {
 
     const [mostrarCadastro, setMostrarCadastro] = useState(false);
     const [disciplinasNaoProf, setDisciplnasNaoProf] = useState([]);
@@ -21,6 +21,7 @@ export default  function TableProfessores({ professores }) {
     function post(obj) {
         PostData(obj, "professor")
         setMostrarCadastro(false)
+        atualizar()
     }
     return (
         <div className="flex flex-col gap-1  w-full">
@@ -29,7 +30,7 @@ export default  function TableProfessores({ professores }) {
             </div>
             <div  className="flex flex-col gap-1">
                 {professores.map(professor => {
-                    return <DisciplinaProfessor key={professor.id} professor={professor} disciplinas={disciplinasNaoProf} />
+                    return <DisciplinaProfessor key={professor.id} atualizar={() => atualizar()} professor={professor} disciplinas={disciplinasNaoProf} />
                 })}
             </div>
             {mostrarCadastro &&

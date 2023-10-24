@@ -1,7 +1,7 @@
 import { GetDataId, PutData } from "@/pages/api/hello";
 import { useEffect, useState } from "react";
 
-export default function DisciplinaProfessor({ professor, disciplinas }) {
+export default function DisciplinaProfessor({ professor, disciplinas, atualizar }) {
     const [disciplina, setDisciplina] = useState(null);
     useEffect(() => {
         async function getDisciplina(){
@@ -19,6 +19,7 @@ export default function DisciplinaProfessor({ professor, disciplinas }) {
             professor.disciplina = { "id": parseInt(value) };
         }
         await PutData(professor, "professor")
+        atualizar()
     }
 
     return (

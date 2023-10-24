@@ -33,37 +33,40 @@ export default function User() {
     useEffect(() => {
         async function getUsuario() {
             if (id == undefined) return
-            let usuarioTemp = await GetDataId(id, "usuario")
-            setUsuario(usuarioTemp)
-
-            let secretariosTemp = await secretariosData;
-            let alunosTemp = await alunosData;
-            let professoresTemp = await professoresData;
-
-
-            setAlunos(alunosTemp);
-            setProfessores(professoresTemp);
-            setSecretarios(secretariosTemp);
-
-            setDisciplinas(await disciplinasData);
-
-            let professor = contem(usuarioTemp, professoresTemp)
-            setIsAluno(contem(usuarioTemp, alunosTemp));
-            setIsProf(professor);
-            setIsSecretario(contem(usuarioTemp, secretariosTemp));
-
-
-            console.log(usuarioTemp)
-            if (professor) {
-                setTurmas(usuarioTemp.disciplina == null ? [] : await turmasDoProfessor(usuarioTemp.disciplina))
-
-            }
-            else {
-                setTurmas(await GetAllData("turma"))
-            }
+            await setListas(id)
         }
         getUsuario();
     }, [id])
+
+    async function setListas(id) {
+        console.log(id)
+        let usuarioTemp = await GetDataId(id, "usuario")
+        setUsuario(usuarioTemp)
+
+        let secretariosTemp = await secretariosData;
+        let alunosTemp = await alunosData;
+        let professoresTemp = await professoresData;
+
+
+        setAlunos(alunosTemp);
+        setProfessores(professoresTemp);
+        setSecretarios(secretariosTemp);
+
+        setDisciplinas(await disciplinasData);
+
+        let professor = contem(usuarioTemp, professoresTemp)
+        setIsAluno(contem(usuarioTemp, alunosTemp));
+        setIsProf(professor);
+        setIsSecretario(contem(usuarioTemp, secretariosTemp));
+
+        if (professor) {
+            setTurmas(usuarioTemp.disciplina == null ? [] : await turmasDoProfessor(usuarioTemp.disciplina))
+        }
+        else {
+            setTurmas(await GetAllData("turma"))
+        }
+    }
+
 
     return (
         <RotaPrivada id={id}>
@@ -71,25 +74,25 @@ export default function User() {
             {
                 isAluno &&
                 <div className="w-4/5 gap-6 flex justify-center">
-                    <TableDisciplinasAluno aluno={usuario}></TableDisciplinasAluno>
-                    <TableMinhaTurma turma={usuario.turma}></TableMinhaTurma>
+                    <TableDisciplinasAluno aluno={usuario} ></TableDisciplinasAluno>
+                    <TableMinhaTurma turma={usuario.turma} ></TableMinhaTurma>
                 </div>
             }
             {
                 isProf &&
                 <div className="w-4/5 gap-6 flex justify-center">
-                    <TableTurmas professor={usuario} turmas={turmas}></TableTurmas>
-                    <TableAlunosProfessor professor={usuario} atualizar={() => setUsuario(usuario)}></TableAlunosProfessor>
+                    <TableTurmas professor={usuario} turmas={turmas} atualizar={() => setListas(id)}></TableTurmas>
+                    <TableAlunosProfessor professor={usuario} atualizar={() => setListas(id)}></TableAlunosProfessor>
                 </div>
             }
             {
                 isSecretario &&
                 <div className="w-4/5 gap-6 flex justify-center">
-                    <TableAlunos alunos={alunos} turmas={turmas}></TableAlunos>
-                    <TableTurmas turmas={turmas}></TableTurmas>
-                    <TableProfessores professores={professores}></TableProfessores>
-                    <TableDisciplinas disciplinas={disciplinas}></TableDisciplinas>
-                    <TableSecretarios secretarios={secretarios}></TableSecretarios>
+                    <TableAlunos alunos={alunos} turmas={turmas} atualizar={() => setListas(id) }></TableAlunos>
+                    <TableTurmas turmas={turmas}  atualizar={() => setListas(id) }></TableTurmas>
+                    <TableProfessores professores={professores}  atualizar={() => setListas(id) }></TableProfessores>
+                    <TableDisciplinas disciplinas={disciplinas}  atualizar={() => setListas(id) }></TableDisciplinas>
+                    <TableSecretarios secretarios={secretarios}  atualizar={() => setListas(id) }></TableSecretarios>
                 </div>
             }
         </RotaPrivada>

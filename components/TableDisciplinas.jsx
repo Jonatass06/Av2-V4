@@ -3,7 +3,7 @@ import Image from "next/image"
 import Disciplina from "./Disciplina"
 import GetAllData, { DeleteData, PostData } from "@/pages/api/hello"
 
-export default  function TableDisciplinas ({ disciplinas }) {
+export default  function TableDisciplinas ({ disciplinas, atualizar }) {
     const [materias, setMaterias] = useState([])
 
     useEffect(() => {
@@ -14,10 +14,12 @@ export default  function TableDisciplinas ({ disciplinas }) {
     async function post() {
         await PostData({}, "disciplina");
         setMaterias(await GetAllData("disciplina"))
+        atualizar()
     }
     async function deletar(disciplina) {
         await DeleteData(disciplina.id, "disciplina")
         setMaterias(await GetAllData("disciplina"))
+        atualizar()
     }
 
     return (
@@ -29,7 +31,7 @@ export default  function TableDisciplinas ({ disciplinas }) {
             <div  className="flex flex-col gap-1">
                 {materias.map(disciplina => {
                     return <div  key={disciplina.id} className="flex gap-1 h-min w-full">
-                        <Disciplina disciplina={disciplina} />
+                        <Disciplina disciplina={disciplina} atualizar={() => atualizar()} />
                         <button className="linhas text-red-800 w-min h-full items-center justify-center" onClick={() => deletar(disciplina)}>X</button>
                     </div>
                 })}

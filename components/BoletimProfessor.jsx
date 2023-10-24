@@ -17,7 +17,7 @@ export default  function BoleitmProfessor({ professor, turma }) {
     }, [professor, turma]);
 
     return (
-        <div className="fixed flex justify-center items-center top-0 right-0 left-0 bottom-0 backdrop-blur-[2px]">
+        <div className="fixed flex justify-center items-center top-0 right-0 left-0 bottom-0 backdrop-blur-[2px] bg-[rbga(0,0,0,0.25)]">
             <div className="w-2/4 rounded-md p-2 bg-branco shadow-10b">
                 <div className="titulo">Boletim</div>
                 <div className="h-min flex items-center justify-start p-2 border-y-2 border-x-2 border-verde 

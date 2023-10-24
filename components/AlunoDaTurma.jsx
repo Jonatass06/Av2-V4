@@ -33,6 +33,7 @@ export default function AlunoDaTurma({ aluno, professor, atualizar }) {
     async function deletarNota(prova) {
         await DeleteData(prova.id, "prova");
         setProvas(await provasDoAluno(aluno))
+        atualizar()
     }
 
     return (

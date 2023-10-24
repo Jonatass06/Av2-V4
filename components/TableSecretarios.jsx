@@ -3,13 +3,13 @@ import ModalCadastro from "./ModalCadastro"
 import Image from "next/image";
 import { PostData } from "@/pages/api/hello";
 
-export default  function TableSecretarios({ secretarios }) {
+export default  function TableSecretarios({ secretarios, atualizar }) {
 
     const [mostrarCadastro, setMostrarCadastro] = useState(false);
     function post(obj) {
         PostData(obj, "secretario")
         setMostrarCadastro(false)
-
+        atualizar()
     }
 
     return (

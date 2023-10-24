@@ -4,7 +4,7 @@ import ModalCadastro from "./ModalCadastro"
 import { useState } from "react";
 import Image from "next/image";
 
-export default  function TableAlunos({ alunos, turmas }) {
+export default  function TableAlunos({ alunos, turmas, atualizar }) {
 
     const [mostrarCadastro, setMostrarCadastro] = useState(false);
     function post(obj) {
@@ -14,6 +14,8 @@ export default  function TableAlunos({ alunos, turmas }) {
     function put(aluno, value) {
         aluno.turma = { "id": parseInt(value) };
         PutData(aluno, "aluno")
+        atualizar()
+        
     }
     return (
         <div className="flex flex-col gap-1 w-full">
