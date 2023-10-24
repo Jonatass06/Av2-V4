@@ -9,7 +9,7 @@ export default  function Disciplina({ disciplina, atualizar }) {
         if (disciplina == undefined) return
         setNome(disciplina.nome)
         setCarga(disciplina.cargaHoraria)
-    }, [disciplina])
+    }, [disciplina, atualizar])
 
     async function put() {
         let obj = {

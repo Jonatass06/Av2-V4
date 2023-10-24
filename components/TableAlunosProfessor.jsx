@@ -9,10 +9,9 @@ export default  function TableAlunosProfessor({ professor, atualizar }) {
         async function alunos() {
             let alunosData = professor.disciplina == null ? [] : await alunosDoProfessor( professor.disciplina)
             setAlunos(alunosData)
-            console.log(alunosData)
         }
         alunos()
-    }, [professor])
+    }, [professor , atualizar])
 
 
     return (

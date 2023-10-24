@@ -13,7 +13,7 @@ export default function TableTurmas (props) {
             setTurmas(props.turmas)
         }
         getTurmas()
-    }, [props.turmas])
+    }, [props.turmas ,props.atualizar])
 
     async function post() {
         await PostData({}, "turma");

@@ -16,7 +16,7 @@ export default function AlunoDaTurma({ aluno, professor, atualizar }) {
             setProvas(provasData)
         }
         getProvas()
-    }, [aluno])
+    }, [aluno, atualizar])
 
     async function postNota(aluno) {
         await PostData(

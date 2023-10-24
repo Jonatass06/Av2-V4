@@ -16,7 +16,7 @@ export default  function TableProfessores({ professores, atualizar }) {
             setDisciplnasNaoProf(discipinasTemp)
         }
         setDisciplinas(0)
-    }, [])
+    }, [professores,  atualizar])
 
     function post(obj) {
         PostData(obj, "professor")

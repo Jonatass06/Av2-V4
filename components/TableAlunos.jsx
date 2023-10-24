@@ -3,19 +3,21 @@ import { PostData, PutData } from "@/pages/api/hello"
 import ModalCadastro from "./ModalCadastro"
 import { useState } from "react";
 import Image from "next/image";
-
+import alunosDaTurma from "@/data/alunosDaTurma"
 export default  function TableAlunos({ alunos, turmas, atualizar }) {
 
     const [mostrarCadastro, setMostrarCadastro] = useState(false);
+
+    //useEffect que define os alunos das turmas
+
     function post(obj) {
         PostData(obj, "aluno")
         setMostrarCadastro(false)
     }
     function put(aluno, value) {
-        aluno.turma = { "id": parseInt(value) };
+        aluno.turma = value == "N/A" ? null : { "id": parseInt(value) };
         PutData(aluno, "aluno")
-        atualizar()
-        
+        atualizar()   
     }
     return (
         <div className="flex flex-col gap-1 w-full">
@@ -27,10 +29,10 @@ export default  function TableAlunos({ alunos, turmas, atualizar }) {
                 {alunos.map(aluno => {
                     return <div key={aluno.id}  className="flex gap-1">
                         <div className="linhas w-full">{aluno.nome}</div>
-                        <select className="linhas w-min" value={aluno.turma ? aluno.turma.id : null} onChange={e => put(aluno, e.target.value)}>
+                        <select className="linhas w-min" defaultValue={aluno.turma ? aluno.turma.id : null} onChange={e => put(aluno, e.target.value)}>
                             <option value={null} >N/A</option>
                             {turmas.map(turma => {
-                                if (contem(aluno, turma.alunos)) {
+                                if (contem(aluno,  turma.alunos)) {
                                     return <option key={turma.id} value={turma.id}>{turma.id}</option>
                                 }
                                 return <option key={turma.id} value={turma.id}>{turma.id}</option>

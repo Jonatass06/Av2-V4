@@ -30,7 +30,7 @@ export default function ProvasDoAluno({ aluno, disciplina }) {
             })}
             <div className="w-min font-bold">
                 {
-                    provas.length > 1 ?
+                    provas.length > 0 ?
                         (getSoma(provas) / provas.length).toFixed(2) :
                         provas.map(prova => { prova.nota })
                 }

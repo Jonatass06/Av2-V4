@@ -39,7 +39,6 @@ export default function User() {
     }, [id])
 
     async function setListas(id) {
-        console.log(id)
         let usuarioTemp = await GetDataId(id, "usuario")
         setUsuario(usuarioTemp)
 

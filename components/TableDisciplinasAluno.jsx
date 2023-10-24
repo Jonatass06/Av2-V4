@@ -22,7 +22,6 @@ export default function TableDisciplinasAluno({ aluno }) {
     return (
         <div className="flex flex-col gap-1  w-full">
             <div className="titulo gap-16">
-                {console.log(disciplinas)}
                 <div className="h-full">
                     Disciplinas
                 </div>
@@ -32,7 +31,7 @@ export default function TableDisciplinasAluno({ aluno }) {
                 </button>
                 {relatorio &&
                     <div className="fixed flex justify-center items-center top-0 right-0 left-0 bottom-0">
-                        <BoletimAluno aluno={aluno}></BoletimAluno>
+                        <BoletimAluno aluno={aluno} fechar={() => setRelatorio(false)}></BoletimAluno>
                     </div>
                 }
             </div>

@@ -2,22 +2,22 @@ import alunosDaTurma from "@/data/alunosDaTurma";
 import { useEffect, useState } from "react"
 import ProvasDoAluno from "./ProvasDoAluno";
 
-export default  function BoleitmProfessor({ professor, turma }) {
+export default  function BoleitmProfessor({ professor, turma, fechar }) {
 
     const [alunos, setAlunos] = useState([])
 
     useEffect(() => {
         if (professor == undefined) return
         async function alunos() {
-            console.log(professor)
             let alunosData = await alunosDaTurma(turma);
             setAlunos(alunosData)
         }
         alunos()
-    }, [professor, turma]);
+    }, [professor, turma, fechar]);
 
     return (
-        <div className="fixed flex justify-center items-center top-0 right-0 left-0 bottom-0 backdrop-blur-[2px] bg-[rbga(0,0,0,0.25)]">
+        <div onClick={e => e.target.id == "fundo" && fechar()} id="fundo"
+        className="fixed flex justify-center items-center top-0 right-0 left-0 bottom-0 backdrop-blur-[2px] bg-[rbga(0,0,0,0.25)]">
             <div className="w-2/4 rounded-md p-2 bg-branco shadow-10b">
                 <div className="titulo">Boletim</div>
                 <div className="h-min flex items-center justify-start p-2 border-y-2 border-x-2 border-verde 

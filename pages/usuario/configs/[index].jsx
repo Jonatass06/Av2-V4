@@ -23,7 +23,6 @@ export default function ConfigsUser () {
         async function getUsuario() {
             if(index == undefined) return
             let usuario = await GetDataId(index, "usuario")
-            console.log(usuario)
             setUsuario(usuario)
             setNome(usuario.nome)
             setSenha(usuario.senha)

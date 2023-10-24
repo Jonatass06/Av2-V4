@@ -2,21 +2,21 @@ import { useEffect, useState } from "react"
 import ProvasDoAluno from "./ProvasDoAluno";
 import { GetDataId } from "@/pages/api/hello";
 
-export default function BoletimDoAluno({ aluno }) {
+export default function BoletimDoAluno({ aluno, fechar }) {
     const [disciplinas, setDisciplinas] = useState([])
 
     useEffect(() => {
         if (aluno == undefined) return
         async function alunos() {
-            console.log(aluno)
             let turma = aluno.turma == null ? null : await GetDataId(aluno.turma.id, "turma");
             setDisciplinas(turma == null ? [] : turma.disciplinas)
         }
         alunos()
-    }, [aluno]);
+    }, [aluno, fechar]);
 
     return (
-        <div className="fixed flex justify-center items-center top-0 right-0 left-0 bottom-0 backdrop-blur-[2px] bg-[rbga(0,0,0,0.25)]">
+        <div onClick={e => e.target.id == "fundo" && fechar()} id="fundo"
+        className="fixed flex justify-center items-center top-0 right-0 left-0 bottom-0 backdrop-blur-[2px] bg-[rbga(0,0,0,0.25)]">
 
             <div className="w-2/4 rounded-md p-2 bg-branco shadow-10b" >
                 <div className="titulo">Boletim</div>

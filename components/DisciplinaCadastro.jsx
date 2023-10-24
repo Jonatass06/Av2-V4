@@ -11,7 +11,7 @@ export default  function DisciplinaCadastro({turma, postDisciplina}) {
             setDisciplinas(await disciplinasNaoTurma(turma))
         }
         getTurma()
-    }, [turma])
+    }, [turma, postDisciplina])
 
     async function escolheDisciplina (e) {
         postDisciplina(e.target.value)

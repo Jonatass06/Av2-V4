@@ -8,7 +8,6 @@ export default function PrivateRoute({ children, id }) {
     useEffect(() => {
         for (let cookie of document.cookie.split(';')) {
             const [name, value] = cookie.trim().split('=');
-            console.log(name, value)
             if (name == 'logado') {
                 autenticado = (value == id);
             }

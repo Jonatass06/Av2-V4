@@ -9,7 +9,7 @@ export default  function TableDisciplinas ({ disciplinas, atualizar }) {
     useEffect(() => {
         if (disciplinas == undefined) return
         setMaterias(disciplinas)
-    }, [disciplinas])
+    }, [disciplinas, atualizar])
 
     async function post() {
         await PostData({}, "disciplina");

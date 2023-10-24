@@ -28,14 +28,14 @@ export default function Turma({ turmaData, professor, atualizar }) {
             setDisciplinas(await disciplinasNaoTurma(turmaData))
         }
         getAlunos()
-    }, [turmaData]);
+    }, [turmaData , atualizar]);
 
     async function postDisciplina(id) {
         turma.disciplinas.push({ "id": id });
         await PutData(turma, "turma");
         setTurma(await GetDataId(turma.id, 'turma'))
         setDisciplinas(await disciplinasNaoTurma(turma))
-        props.atualizar()
+        atualizar()
     }
 
     async function deletar(id, tabela) {
@@ -52,7 +52,7 @@ export default function Turma({ turmaData, professor, atualizar }) {
         setTurma(await GetDataId(turma.id, 'turma'))
         setAlunos(await alunosDaTurma(turma))
         setDisciplinas(await disciplinasNaoTurma(turma))
-        props.atualizar()
+        atualizar()
     }
 
     async function verRelatorio() {
@@ -98,9 +98,9 @@ export default function Turma({ turmaData, professor, atualizar }) {
                 </button>
             {relatorio &&
                 (professor ?
-                    <BoletimProfessor professor={professor} turma={turma}></BoletimProfessor>
+                    <BoletimProfessor professor={professor} turma={turma} fechar={() => setRelatorio(false)}></BoletimProfessor>
                     :
-                    <div className="h-3/4 gap-6 overflow-clip"><BoletinsSecretario alunosData={alunos}></BoletinsSecretario></div>)
+                    <div className="h-3/4 gap-6 overflow-clip"><BoletinsSecretario alunosData={alunos} fechar={() => setRelatorio(false)}></BoletinsSecretario></div>)
             }
         </div>
     )

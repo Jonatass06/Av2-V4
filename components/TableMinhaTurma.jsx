@@ -8,7 +8,6 @@ export default function TableMinhaTurma({ turma }) {
     useEffect(() => {
         async function getAlunos() {
             const alunos = turma == null ? [] : await alunosDaTurma(turma);
-            console.log(alunos)
             setAlunos(alunos)
         }
         getAlunos()

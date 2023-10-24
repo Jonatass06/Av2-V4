@@ -6,18 +6,15 @@ export default function DisciplinaProfessor({ professor, disciplinas, atualizar 
     useEffect(() => {
         async function getDisciplina(){
             if (professor == undefined) return
-            setDisciplina(professor.disciplina == null ? null : await GetDataId(professor.disciplina.id, "disciplina"))
+            setDisciplina(professor.disciplina ? null : professor.disciplina)
         } 
         getDisciplina()
-    }, [professor, disciplinas]);
+    }, [professor, disciplinas, atualizar]);
 
     async function put(professor, value) {
         setDisciplina(await GetDataId(value, "disciplina"));
-        if (value == 0) {
-            professor.disciplina = null;
-        } else {
-            professor.disciplina = { "id": parseInt(value) };
-        }
+        professor.disciplina = value == "N/A" ? null : {"id":parseInt(value)}
+        console.log(professor)
         await PutData(professor, "professor")
         atualizar()
     }
@@ -25,10 +22,10 @@ export default function DisciplinaProfessor({ professor, disciplinas, atualizar 
     return (
         <div className="flex gap-1">
             <div className="linhas w-full">{professor.nome}</div>
-            <select className="linhas w-min" onChange={e => put(professor, e.target.value)}>
+            <select className="linhas w-min" defaultValue={professor.disciplina && professor.disciplina.id || null} onChange={e => put(professor, e.target.value)}>
                 <option value={0}>N/A</option>
-                {disciplina &&
-                    <option value={disciplina.id} selected>{disciplina.nome}</option>
+                {professor.disciplina &&
+                    <option value={professor.disciplina.id}>{professor.disciplina.nome}</option>
                 }
                 {disciplinas.map(disciplina => {
                     return <option key={disciplina.id} value={disciplina.id}>{disciplina.nome}</option>
