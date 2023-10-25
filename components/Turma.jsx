@@ -35,6 +35,7 @@ export default function Turma({ turmaData, professor, atualizar }) {
         await PutData(turma, "turma");
         setTurma(await GetDataId(turma.id, 'turma'))
         setDisciplinas(await disciplinasNaoTurma(turma))
+        setMostrarCD(false)
         atualizar()
     }
 

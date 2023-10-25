@@ -19,7 +19,7 @@ export default  function DisciplinaCadastro({turma, postDisciplina}) {
     }
 
     return(
-        <select className="p-2 border-verde rounded-sm absolute" onBlur={e => {escolheDisciplina(e)}}>
+        <select className="p-2 border-verde border-y-2 border-x-2 top-[-16px] right-[-100px] z-[997] rounded-sm absolute" onBlur={e => {escolheDisciplina(e)}} autoFocus>
             {disciplinas.map(disciplina => {
                 return <option key={disciplina.id} value={disciplina.id}>{disciplina.nome}</option>
             })}

@@ -2,7 +2,7 @@
 import ModalLogin from "@/components/ModalLogin";
 import LateralLogo from "@/components/LateralLogo";
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 
 export default function Login() {
 

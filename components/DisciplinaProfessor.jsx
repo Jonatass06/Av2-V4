@@ -1,8 +1,18 @@
 import { GetDataId, PutData } from "@/pages/api/hello";
 import { useEffect, useState } from "react";
+import disciplinasNaoProf from "@/data/disciplinasSemProfessor"
+import contem from "@/functions/contem";
 
 export default function DisciplinaProfessor({ professor, disciplinas, atualizar }) {
 
+    const[disciplinasFilter, setDisciplinasFilter] = useState([])
+
+    useEffect(() => {
+        async function getDisciplinas (){
+            setDisciplinasFilter(await disciplinasNaoProf())
+        }
+        getDisciplinas()
+    }, [disciplinas])
 
     async function put(professor, value) {
         professor.disciplina = (value == "N/A" ? null : {"id":parseInt(value)})
@@ -13,13 +23,13 @@ export default function DisciplinaProfessor({ professor, disciplinas, atualizar 
     return (
         <div className="flex gap-1">
             <div className="linhas w-full">{professor.nome}</div>
-            <select className="linhas w-min" defaultValue={professor.disciplina ? professor.disciplina.id : ""} onChange={e => put(professor, e.target.value)}>
+            <select className="linhas w-min" value={professor.disciplina ? professor.disciplina.id : ""} onChange={e => put(professor, e.target.value)}>
                 <option value={null}>N/A</option>
-                {professor.disciplina &&
-                    <option value={professor.disciplina.id}>{professor.disciplina.nome}</option>
-                }
                 {disciplinas.map(disciplina => {
-                    return <option key={disciplina.id} value={disciplina.id}>{disciplina.nome}</option>
+                    return contem(disciplina, disciplinasFilter) ?
+                    <option key={disciplina.id} value={disciplina.id}>{disciplina.nome}</option>
+                    :
+                    <option key={disciplina.id} value={disciplina.id} disabled>{disciplina.nome}</option>
                 })}
             </select>
         </div >
