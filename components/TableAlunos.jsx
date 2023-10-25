@@ -1,23 +1,10 @@
-import contem from "@/functions/contem"
 import { PostData, PutData } from "@/pages/api/hello"
 import ModalCadastro from "./ModalCadastro"
-import { useEffect, useState } from "react";
 import Image from "next/image";
-import alunosDaTurma from "@/data/alunosDaTurma"
+import { useEffect, useState } from "react";
 export default function TableAlunos({ alunos, turmas, atualizar }) {
 
     const [mostrarCadastro, setMostrarCadastro] = useState(false);
-    // Problemas Aqui
-    useEffect(() => {
-        if (turmas == undefined) return
-        async function getAlunos(){
-            for (let t of turmas) {
-                t.alunos = await alunosDaTurma(t)
-            }
-        }
-        getAlunos()
-        console.log(turmas)
-    }, [turmas, alunos, atualizar])
 
     function post(obj) {
         PostData(obj, "aluno")
@@ -38,12 +25,9 @@ export default function TableAlunos({ alunos, turmas, atualizar }) {
                 {alunos.map(aluno => {
                     return <div key={aluno.id} className="flex gap-1">
                         <div className="linhas w-full">{aluno.nome}</div>
-                        <select className="linhas w-min" defaultValue={aluno.turma ? aluno.turma.id : null} onChange={e => put(aluno, e.target.value)}>
+                        <select className="linhas w-min" value={aluno.turma == null ? "" : aluno.turma.id } onChange={e => put(aluno, e.target.value)}>
                             <option value={null} >N/A</option>
                             {turmas.map(turma => {
-                                if (contem(aluno, turma.alunos)) {
-                                    return <option key={turma.id} value={turma.id}>{turma.id}</option>
-                                }
                                 return <option key={turma.id} value={turma.id}>{turma.id}</option>
                             })}
                         </select>

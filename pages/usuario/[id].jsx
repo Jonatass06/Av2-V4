@@ -10,11 +10,7 @@ import TableProfessores from "@/components/TableProfessores";
 import TableTurmas from "@/components/TableTurmas";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import alunosData from "@/data/alunos";
-import professoresData from "@/data/professores";
-import secretariosData from "@/data/secretarios";
 import contem from "@/functions/contem";
-import disciplinasData from "@/data/disciplinas";
 import turmasDoProfessor from "@/data/turmasDoProfessor";
 import TableSecretarios from "@/components/TableSecretarios";
 
@@ -42,16 +38,15 @@ export default function User() {
         let usuarioTemp = await GetDataId(id, "usuario")
         setUsuario(usuarioTemp)
 
-        let secretariosTemp = await secretariosData;
-        let alunosTemp = await alunosData;
-        let professoresTemp = await professoresData;
-
+        let secretariosTemp = await GetAllData("secretario");
+        let alunosTemp = await GetAllData("aluno");
+        let professoresTemp = await GetAllData("professor");
 
         setAlunos(alunosTemp);
         setProfessores(professoresTemp);
         setSecretarios(secretariosTemp);
 
-        setDisciplinas(await disciplinasData);
+        setDisciplinas(await GetAllData("disciplina"));
 
         let professor = contem(usuarioTemp, professoresTemp)
         setIsAluno(contem(usuarioTemp, alunosTemp));

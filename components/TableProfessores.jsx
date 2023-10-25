@@ -12,7 +12,7 @@ export default  function TableProfessores({ professores, atualizar }) {
 
     useEffect(() => {
         async function setDisciplinas(){
-            let discipinasTemp = await disciplinasNaoProfData;
+            let discipinasTemp = await disciplinasNaoProfData();
             setDisciplnasNaoProf(discipinasTemp)
         }
         setDisciplinas(0)

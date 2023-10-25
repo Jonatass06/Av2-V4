@@ -45,7 +45,7 @@ export default function TableDisciplinasAluno({ aluno }) {
                             </div>
                             {mostrarNotas &&
                                 <div>
-                                    {aluno.provas.map(prova => {
+                                    {aluno.provas && aluno.provas.map(prova => {
                                         if (prova.disciplina == disciplina) {
                                             return <div key={prova.id}>
                                                 <div>{prova.nota}</div>

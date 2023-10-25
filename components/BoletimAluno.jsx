@@ -25,7 +25,7 @@ export default function BoletimDoAluno({ aluno, fechar }) {
                 <div>
                     {
                         disciplinas.map(disciplina => {
-                            return <div key={disciplina.id} className={`flex gap-6 ${disciplinas.indexOf(disciplina) % 2 == 0 ? "bg-branco" : "bg-[#D9F0E5]"}`}>
+                            return <div key={disciplina.id} className={`flex gap-6 text-azul font-montserrat text-[16px] ${disciplinas.indexOf(disciplina) % 2 == 0 ? "bg-branco" : "bg-[#D9F0E5]"}`}>
                                 <div className="w-full">
                                     Disciplina: {disciplina.nome}
                                 </div>

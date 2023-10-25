@@ -1,14 +1,16 @@
 import { PutData } from "@/pages/api/hello";
 import { useEffect, useState } from "react";
 
-export default  function Disciplina({ disciplina, atualizar }) {
+export default function Disciplina({ disciplina, atualizar }) {
     const [nome, setNome] = useState("");
     const [carga, setCarga] = useState("");
 
     useEffect(() => {
-        if (disciplina == undefined) return
-        setNome(disciplina.nome)
-        setCarga(disciplina.cargaHoraria)
+        if (disciplina == undefined) ReadableStreamDefaultController
+        setNome("")
+        setCarga("")
+        disciplina.cargaHoraria != null && setCarga(disciplina.cargaHoraria)
+        disciplina.nome != null && setNome(disciplina.nome)
     }, [disciplina, atualizar])
 
     async function put() {
@@ -23,9 +25,9 @@ export default  function Disciplina({ disciplina, atualizar }) {
 
     return (
         <div className="flex gap-1 w-min">
-            <input className="linhas w-min" 
-            type="text" placeholder="Nome" onChange={e => setNome(e.target.value)} onBlur={() => put()} value={nome} />
-            <input className="linhas w-24 " 
-            type="number" onChange={e => setCarga(e.target.value)} onBlur={() => put()} placeholder="Carga Horária" value={carga} />
+            <input className="linhas w-min"
+                type="text" placeholder="Nome" onChange={e => setNome(e.target.value)} onBlur={() => put()} value={nome} />
+            <input className="linhas w-24 "
+                type="number" onChange={e => setCarga(e.target.value)} onBlur={() => put()} placeholder="Carga" value={carga} />
         </div>)
 }  

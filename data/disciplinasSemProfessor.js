@@ -1,12 +1,8 @@
-import disciplinas from "./disciplinas"
-import { PathParamsContext } from "next/dist/shared/lib/hooks-client-context.shared-runtime";
-import professores from "./professores";
+import GetAllData from "@/pages/api/hello";
 
-const disciplinasSemProf = get();
-
-async function get() {
-  const disciplinasTemp = await disciplinas;
-  const professoresTemp = await professores;
+export default async function get() {
+  const disciplinasTemp = await GetAllData("disciplina");
+  const professoresTemp = await GetAllData("professor");
   const disciplinasNaoProf = [];
     for(let d of disciplinasTemp){
         let tem = false;
@@ -20,5 +16,3 @@ async function get() {
 
   return disciplinasNaoProf;
 }
-
-export default disciplinasSemProf;
