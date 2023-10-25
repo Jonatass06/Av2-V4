@@ -27,7 +27,7 @@ export default function TableTurmas (props) {
     }
 
     return (
-        <div className="flex flex-col gap-1 w-full">
+        <div className="tabela">
             <div className="titulo">Turmas
                 {!professor &&
                     <button className="botao" onClick={() => post()}><Image className=" invert" width={16} height={16} alt="adicionar" src="/mais.png"/></button>}

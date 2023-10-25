@@ -1,13 +1,10 @@
 import Header from "@/components/Header"
 import contem from "@/functions/contem";
-import { DeleteData, PutData } from "@/pages/api/hello";
+import GetAllData, { DeleteData, PutData } from "@/pages/api/hello";
 import { GetDataId } from "@/pages/api/hello";
 import RotaPrivada from "@/components/RotaPrivada"
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import secretarios from "@/data/secretarios";
-import alunos from "@/data/alunos";
-import professores from "@/data/professores";
 import Image from "next/image";
 
 export default function ConfigsUser () {
@@ -49,11 +46,11 @@ export default function ConfigsUser () {
     }
 
     async function getTabela() {
-        if (contem(usuario, await alunos)) {
+        if (contem(usuario, await GetAllData("aluno"))) {
             return "aluno"
-        } else if (contem(usuario, await professores)) {
+        } else if (contem(usuario, await GetAllData("professor"))) {
             return "professor"
-        } else if (contem(usuario, await secretarios)) {
+        } else if (contem(usuario, await GetAllData("secretario"))) {
             return "secretario"
         }
     }

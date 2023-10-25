@@ -24,7 +24,7 @@ export default  function TableProfessores({ professores, atualizar }) {
         atualizar()
     }
     return (
-        <div className="flex flex-col gap-1  w-full">
+        <div className="tabela">
             <div className="titulo">Professores
                 <button className="botao" onClick={() => setMostrarCadastro(true)}><Image className=" invert" width={16} height={16} alt="adicionar" src="/mais.png"/></button>
             </div>

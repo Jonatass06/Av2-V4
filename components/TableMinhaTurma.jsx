@@ -14,7 +14,7 @@ export default function TableMinhaTurma({ turma }) {
     }, [turma])
 
     return (
-        <div className="flex flex-col gap-1  w-full">
+        <div className="tabela">
             <div className="titulo">Minha Turma : {turma == null ? "N / A ": turma.id}</div>
             <div>
                 {
