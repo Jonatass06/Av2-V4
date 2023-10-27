@@ -1,4 +1,4 @@
-import GetAllData from "@/pages/api/hello";
+import GetAllData from  "@/api/api";
 
 export default async function get(disciplina) {
     const turmas = await GetAllData("turma")

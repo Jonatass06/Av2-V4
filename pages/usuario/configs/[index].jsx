@@ -1,13 +1,14 @@
 import Header from "@/components/Header"
 import contem from "@/functions/contem";
-import GetAllData, { DeleteData, PutData } from "@/pages/api/hello";
-import { GetDataId } from "@/pages/api/hello";
+import GetAllData, { DeleteData, PutData } from  "@/api/api";
+import { GetDataBy } from  "@/api/api";
 import RotaPrivada from "@/components/RotaPrivada"
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Erro from "@/components/Erro";
 
-export default function ConfigsUser () {
+export default function ConfigsUser() {
     const router = useRouter();
     const { index } = router.query;
     const [usuario, setUsuario] = useState({})
@@ -15,34 +16,51 @@ export default function ConfigsUser () {
     const [senha, setSenha] = useState("")
     const [idade, setIdade] = useState("")
     const [endereco, setEndereco] = useState("");
+    const [message, setMessage] = useState("");
+    const [erro, setErro] = useState(false);
 
     useEffect(() => {
         async function getUsuario() {
-            if(index == undefined) return
-            let usuario = await GetDataId(index, "usuario")
-            setUsuario(usuario)
-            setNome(usuario.nome)
-            setSenha(usuario.senha)
-            setIdade(usuario.idade)
-            setEndereco(usuario.endereco)
+            if (index == undefined) return
+            try {
+                let usuario = await GetDataBy(index, "usuario")
+                setUsuario(usuario)
+                setNome(usuario.nome)
+                setSenha(usuario.senha)
+                setIdade(usuario.idade)
+                setEndereco(usuario.endereco)
+            } catch (erro) {
+                router.push("/login")
+            }
+
         }
         getUsuario()
     }, [index])
 
     async function deletar() {
-        document.cookie ='logado=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/usuario';
-        document.cookie ='logado=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/';
-        let tabela = await getTabela(usuario)
-        await DeleteData(index, tabela)
-        router.push("/login")
+        try{
+            document.cookie = 'logado=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/usuario';
+            document.cookie = 'logado=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/';
+            let tabela = await getTabela(usuario)
+            await DeleteData(index, tabela)
+            router.push("/login")
+        }catch(erro){
+            setMessage("Você não pode deletar esse secretário!")
+            setErro(true)
+        }
     }
 
     async function atualizar() {
-        let tabela = await getTabela(usuario)
-        usuario.nome = nome;
-        usuario.idade = idade;
-        usuario.endereco = endereco;
-        await PutData(usuario, tabela)
+        try {
+            let tabela = await getTabela(usuario)
+            usuario.nome = nome;
+            usuario.idade = idade;
+            usuario.endereco = endereco;
+            await PutData(usuario, tabela)
+        } catch (erro) {
+            setMessage("Já existe um usuário com esse nome cadastrado!")
+            setErro(true)
+        }
     }
 
     async function getTabela() {
@@ -63,7 +81,7 @@ export default function ConfigsUser () {
 
                 <div className="w-[650px] h-[650px] bg-green shadow-10b ronded-[5px] flex flex-col justify-center items-center gap-6 relative z-[997]">
                     <div className="bg-verde w-[100px] h-[100px] absolute z-[999] shadow-10b rounded-full top-[-50px] flex justify-center items-center">
-                        <Image  width={100} height={100} src="/user-icon.png" className="border-verde border-96 invert" alt="" />
+                        <Image width={100} height={100} src="/user-icon.png" className="border-verde border-96 invert" alt="" />
                     </div>
 
                     <form autoComplete="false" className="flex flex-col justify-center items-center gap-6">
@@ -76,6 +94,7 @@ export default function ConfigsUser () {
                     <button className="bg-red-700 w-[370px] h-[80px] text-branco text-[24px] font-alata rounded-[5px]" onClick={() => deletar()}>Deletar Conta</button>
                 </div>
             </section>
+            <Erro condicao={erro} fechar={() => setErro(false)} mensagem={message} />
         </RotaPrivada>
     )
 }

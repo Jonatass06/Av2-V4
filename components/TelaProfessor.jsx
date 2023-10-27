@@ -1,4 +1,4 @@
-import { GetDataId } from "@/pages/api/hello";
+import { GetDataBy } from  "@/api/api";
 import TableAlunosProfessor from "./TableAlunosProfessor";
 import TableTurmas from "./TableTurmas";
 import turmasDoProfessor from "@/data/turmasDoProfessor"
@@ -19,7 +19,7 @@ export default function TelaProfessor({ professorData }) {
     }, [professorData])
 
     async function setListas() {
-        const professorTemp = await GetDataId(professorData.id, "usuario")
+        const professorTemp = await GetDataBy(professorData.id, "usuario")
         setProfessor(professorTemp)
         setTurmas(professorTemp.disciplina == null ? [] : await turmasDoProfessor(professorTemp.disciplina))
     }
@@ -27,8 +27,8 @@ export default function TelaProfessor({ professorData }) {
     return (
         <div className="w-screen flex justify-center mt-24 ">
             <div className="flex flex-col items-end w-min mr-6">
-                <button className="tag" title="Turmas" onClick={() => setMostrarT(!mostrarT)}>{mostrarT && <p className="girado">Turmas</p>}</button>
-                <button className="tag" title="Alunos" onClick={() => setMostrarA(!mostrarA)}>{mostrarA && <p className="girado">Alunos</p>}</button>
+                <button className="tag" title="Turmas" onClick={() => setMostrarT(!mostrarT)}>{!mostrarT && <p className="girado">Turmas</p>}</button>
+                <button className="tag" title="Alunos" onClick={() => setMostrarA(!mostrarA)}>{!mostrarA && <p className="girado">Alunos</p>}</button>
             </div>
             <div className="w-4/5 gap-6 flex justify-center">
                 {mostrarT && <TableTurmas professor={professor} turmas={turmas} atualizar={() => setListas()}></TableTurmas>}

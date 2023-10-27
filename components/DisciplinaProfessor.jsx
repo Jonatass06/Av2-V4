@@ -1,4 +1,4 @@
-import { GetDataId, PutData } from "@/pages/api/hello";
+import { GetDataBy, PutData } from  "@/api/api";
 import { useEffect, useState } from "react";
 import disciplinasNaoProf from "@/data/disciplinasSemProfessor"
 import contem from "@/functions/contem";

@@ -22,11 +22,11 @@ input {
 }
 
 .linhas {
-  @apply h-16 flex items-center justify-center p-2 border-y-2 border-x-2 border-verde rounded-md font-montserrat text-[16px] focus:outline-none;
+  @apply py-5 min-h-full flex items-center justify-center p-2 border-2 border-verde rounded-md font-montserrat text-[16px] focus:outline-none;
 }
 
 .botao {
-  @apply bg-verde rounded-full w-8 h-8 flex items-center justify-center border-y-2 border-x-2 border-branco;
+  @apply bg-verde rounded-full w-6 h-6 flex items-center justify-center border-2 border-branco;
 }
 
 .relatorio {
@@ -34,7 +34,7 @@ input {
 }
 
 .titulo {
-  @apply w-full p-6 bg-verde text-branco flex justify-between items-center rounded-md text-[24px] h-20 font-alata;
+  @apply w-full p-6 bg-verde text-branco flex justify-between items-center rounded-md text-[24px] min-h-[80px] font-alata;
 }
 
 .tag {
@@ -46,5 +46,8 @@ input {
   }
 
   .tabela{
-    @apply flex flex-col gap-1 w-full  p-6 rounded-md shadow-10b bg-branco h-[75vh] overflow-clip;
-    }
+    @apply flex flex-col gap-1 w-full p-6 rounded-md shadow-10b bg-branco h-min max-h-[75vh] overflow-y-clip;
+}
+.scroll{
+  @apply overflow-y-auto
+}

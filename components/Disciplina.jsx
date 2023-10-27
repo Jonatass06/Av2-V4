@@ -1,4 +1,4 @@
-import { PutData } from "@/pages/api/hello";
+import { PutData } from  "@/api/api";
 import { useEffect, useState } from "react";
 
 export default function Disciplina({ disciplina, atualizar }) {
@@ -24,8 +24,8 @@ export default function Disciplina({ disciplina, atualizar }) {
     }
 
     return (
-        <div className="flex gap-1 w-min">
-            <input className="linhas w-min"
+        <div className="flex gap-1 w-full">
+            <input className="linhas w-full"
                 type="text" placeholder="Nome" onChange={e => setNome(e.target.value)} onBlur={() => put()} value={nome} />
             <input className="linhas w-24 "
                 type="number" onChange={e => setCarga(e.target.value)} onBlur={() => put()} placeholder="Carga" value={carga} />

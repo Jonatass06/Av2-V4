@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import ProvasDoAluno from "./ProvasDoAluno";
-import { GetDataId } from "@/pages/api/hello";
+import { GetDataBy } from  "@/api/api";
 
 export default function BoletimDoAluno({ aluno, fechar }) {
     const [disciplinas, setDisciplinas] = useState([])
@@ -8,7 +8,7 @@ export default function BoletimDoAluno({ aluno, fechar }) {
     useEffect(() => {
         if (aluno == undefined) return
         async function alunos() {
-            let turma = aluno.turma == null ? null : await GetDataId(aluno.turma.id, "turma");
+            let turma = aluno.turma == null ? null : await GetDataBy(aluno.turma.id, "turma");
             setDisciplinas(turma == null ? [] : turma.disciplinas)
         }
         alunos()
@@ -16,7 +16,8 @@ export default function BoletimDoAluno({ aluno, fechar }) {
 
     return (
         <div onClick={e => e.target.id == "fundo" && fechar()} id="fundo"
-        className="fixed flex justify-center items-center top-0 right-0 left-0 bottom-0 backdrop-blur-[2px] bg-[rbga(0,0,0,0.25)]">
+        className="fixed flex justify-center items-center top-0 right-0 z-[999]
+        left-0 bottom-0 backdrop-blur-[2px] bg-[rbga(0,0,0,0.25)]">
 
             <div className="w-2/4 rounded-md p-2 bg-branco shadow-10b" >
                 <div className="titulo">Boletim</div>

@@ -21,7 +21,7 @@ export default function ProvasDoAluno({ aluno, disciplina }) {
     }
 
     return (
-        <div className="flex w-full">
+        <div className="flex w-full  text-azul">
             {provas.map(prova => {
                 return <div key={prova.id} className="w-full flex">
                     <div className="w-full">{prova.nota}</div>

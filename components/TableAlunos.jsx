@@ -1,4 +1,4 @@
-import { PostData, PutData } from "@/pages/api/hello"
+import { PostData, PutData } from  "@/api/api"
 import ModalCadastro from "./ModalCadastro"
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -21,7 +21,7 @@ export default function TableAlunos({ alunos, turmas, atualizar }) {
                 Alunos
                 <button className="botao" onClick={() => setMostrarCadastro(true)}><Image className=" invert" width={16} height={16} alt="adicionar" src="/mais.png" /></button>
             </div>
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col gap-1 scroll">
                 {alunos.map(aluno => {
                     return <div key={aluno.id} className="flex gap-1">
                         <div className="linhas w-full">{aluno.nome}</div>

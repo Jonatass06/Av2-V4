@@ -1,25 +1,13 @@
 
 import axios from "axios";
-import { NextResponse } from "next/server";
 
-export async function GetDataId(id, tabela) {
+export async function GetDataBy(paramether, tabela) {
   try {
-    const response = await axios.get("http://10.4.96.35:8082/"+tabela+"/"+id);
+    const response = await axios.get("http://10.4.96.35:8082/"+tabela+"/"+paramether);
     return response.data;
   } catch (error) {
-    console.error("Erro ao buscar produtos:", error);
+    throw error
   }
-}
-
-
-export async function GetUserByPasswordUsername(username, password) {
-  let a = await GetAllData("usuario");
-  for(let dado of await a){
-    if(dado.nome == username && dado.senha == password){
-      return dado;
-    }
-  }
-  return null;
 }
 
 export default async function GetAllData(tabela) {
@@ -27,7 +15,7 @@ export default async function GetAllData(tabela) {
     const response = await axios.get("http://10.4.96.35:8082/"+tabela);
     return response.data;
   } catch (error) {
-    console.error("Erro ao buscar produtos:", error);
+    throw error
   }
 }
 // 

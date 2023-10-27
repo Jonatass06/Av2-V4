@@ -1,4 +1,4 @@
-import { PostData } from "@/pages/api/hello"
+import { PostData } from  "@/api/api"
 import { useEffect, useState } from "react"
 
 export default  function Notas ({ prova, professor}) {

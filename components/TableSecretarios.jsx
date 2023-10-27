@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ModalCadastro from "./ModalCadastro"
 import Image from "next/image";
-import { PostData } from "@/pages/api/hello";
+import { PostData } from  "@/api/api";
 
 export default  function TableSecretarios({ secretarios, atualizar }) {
 
@@ -18,7 +18,7 @@ export default  function TableSecretarios({ secretarios, atualizar }) {
                 Secretarios
                 <button className="botao" onClick={() => setMostrarCadastro(true)}><Image className=" invert" width={16} height={16} alt="adicionar" src="/mais.png"/></button>
             </div>
-            <div  className="flex flex-col gap-1">
+            <div  className="flex flex-col gap-1 scroll">
                 {secretarios.map(secretario => {
                     return <div key={secretario.id}  className="flex gap-1">
                         <div className="linhas h-16 w-3/5">{secretario.nome}</div>

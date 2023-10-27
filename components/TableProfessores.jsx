@@ -1,4 +1,4 @@
-import GetAllData, { PostData } from "@/pages/api/hello"
+import GetAllData, { PostData } from  "@/api/api"
 import ModalCadastro from "./ModalCadastro"
 import DisciplinaProfessor from "./DisciplinaProfessor"
 import { useEffect, useState } from "react";
@@ -28,7 +28,7 @@ export default  function TableProfessores({ professores, atualizar }) {
             <div className="titulo">Professores
                 <button className="botao" onClick={() => setMostrarCadastro(true)}><Image className=" invert" width={16} height={16} alt="adicionar" src="/mais.png"/></button>
             </div>
-            <div  className="flex flex-col gap-1">
+            <div  className="flex flex-col gap-1 scroll">
                 {professores.map(professor => {
                     return <DisciplinaProfessor key={professor.id} atualizar={() => atualizar()} professor={professor} disciplinas={disciplinas} />
                 })}

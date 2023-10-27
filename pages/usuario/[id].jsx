@@ -1,4 +1,4 @@
-import GetAllData, { GetDataId } from "@/pages/api/hello";
+import GetAllData, { GetDataBy } from  "@/api/api";
 import Header from "@/components/Header";
 import RotaPrivada from "@/components/RotaPrivada"
 import { useRouter } from "next/router";
@@ -9,7 +9,8 @@ import TelaProfessor from "@/components/TelaProfessor";
 import TelaSecretario from "@/components/TelaSecretario";
 
 export default function User() {
-    const id = useRouter().query.id;
+    const router = useRouter()
+    const id = router.query.id;
     const [usuario, setUsuario] = useState({});
     const [isProf, setIsProf] = useState(false);
     const [isAluno, setIsAluno] = useState(false);
@@ -18,13 +19,18 @@ export default function User() {
     useEffect(() => {
         async function getUsuario() {
             if (id == undefined) return
-            await setListas(id)
+            try{
+                await setListas(id)
+            }catch(erro){
+                router.push("/login")
+            }
+
         }
         getUsuario();
     }, [id])
 
     async function setListas(id) {
-        let usuarioTemp = await GetDataId(id, "usuario")
+        let usuarioTemp = await GetDataBy(id, "usuario")
         setUsuario(usuarioTemp)
 
         let secretariosTemp = await GetAllData("secretario");
@@ -34,7 +40,6 @@ export default function User() {
         setIsAluno(contem(usuarioTemp, alunosTemp));
         setIsProf(contem(usuarioTemp, professoresTemp));
         setIsSecretario(contem(usuarioTemp, secretariosTemp));
-
     }
 
 

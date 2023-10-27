@@ -1,4 +1,4 @@
-import GetAllData from "@/pages/api/hello";
+import GetAllData from  "@/api/api";
 import { useEffect, useState } from "react";
 import TableAlunos from "./TableAlunos";
 import TableDisciplinas from "./TableDisciplinas";
@@ -37,15 +37,15 @@ export default function TelaSecretario({ secretarioData }) {
     }
 
     return (
-        <div className="w-screen flex justify-center mt-24 ">
+        <div className="w-screen flex justify-center mt-24">
             <div className="flex flex-col items-end w-min mr-6">
-                <button className="tag" title="Alunos" onClick={() => setMostrarA(!mostrarA)}>{mostrarA && <p className="girado">Alunos</p>}</button>
-                <button className="tag" title="Turmas" onClick={() => setMostrarT(!mostrarT)}>{mostrarT && <p className="girado">Turmas</p>}</button>
-                <button className="tag" title="Professores" onClick={() => setMostrarP(!mostrarP)}>{mostrarP && <p className="girado">Professores</p>}</button>
-                <button className="tag" title="Disciplinas" onClick={() => setMostrarD(!mostrarD)}>{mostrarD && <p className="girado">Disciplinas</p>}</button>
-                <button className="tag" title="Secretários" onClick={() => setMostrarS(!mostrarS)}>{mostrarS && <p className="girado">Secretários</p>}</button>
+                <button className="tag" title="Alunos" onClick={() => setMostrarA(!mostrarA)}>{!mostrarA && <p className="girado">Alunos</p>}</button>
+                <button className="tag" title="Turmas" onClick={() => setMostrarT(!mostrarT)}>{!mostrarT && <p className="girado">Turmas</p>}</button>
+                <button className="tag" title="Professores" onClick={() => setMostrarP(!mostrarP)}>{!mostrarP && <p className="girado">Professores</p>}</button>
+                <button className="tag" title="Disciplinas" onClick={() => setMostrarD(!mostrarD)}>{!mostrarD && <p className="girado">Disciplinas</p>}</button>
+                <button className="tag" title="Secretários" onClick={() => setMostrarS(!mostrarS)}>{!mostrarS && <p className="girado">Secretários</p>}</button>
             </div>
-                <div className="w-5/6 gap-6 flex justify-center">
+                <div className="w-5/6 gap-6 flex justify-center flex-wrap">
                     {mostrarA && <TableAlunos alunos={alunos} turmas={turmas} atualizar={() => setListas()}></TableAlunos>}
                     {mostrarT && <TableTurmas turmas={turmas} atualizar={() => setListas()}></TableTurmas>}
                     {mostrarP && <TableProfessores professores={professores} atualizar={() => setListas()}></TableProfessores>}

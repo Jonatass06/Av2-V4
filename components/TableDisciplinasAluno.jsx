@@ -1,5 +1,5 @@
 
-import { GetDataId } from "@/pages/api/hello";
+import { GetDataBy } from  "@/api/api";
 import { useEffect, useState } from "react";
 import professorDaDisciplina from "@/data/professorDaDisciplina"
 import BoletimAluno from "./BoletimAluno";
@@ -10,7 +10,7 @@ export default function TableDisciplinasAluno({ aluno }) {
     const [relatorio, setRelatorio] = useState(false);
     useEffect(() => {
         async function getTurma() {
-            let disciplinas = aluno.turma == null ? [] : (await GetDataId(aluno.turma.id, "turma")).disciplinas
+            let disciplinas = aluno.turma == null ? [] : (await GetDataBy(aluno.turma.id, "turma")).disciplinas
             for(let d of disciplinas){
                 await professorDaDisciplina(d);
             }
@@ -35,7 +35,7 @@ export default function TableDisciplinasAluno({ aluno }) {
                     </div>
                 }
             </div>
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col gap-1 scroll">
                 {disciplinas.map(disciplina => {
                     return <div key={disciplina.id} className="flex gap-1">
                         <div className="linhas w-full ">{disciplina.nome}</div>

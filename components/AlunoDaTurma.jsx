@@ -1,5 +1,5 @@
 import provasDoAluno from "@/data/provasDoAluno";
-import { DeleteData, PostData } from "@/pages/api/hello";
+import { DeleteData, PostData } from "@/api/api";
 import { useEffect, useState } from "react";
 import Notas from "./Notas";
 import Image from "next/image";
@@ -42,7 +42,7 @@ export default function AlunoDaTurma({ aluno, professor, atualizar }) {
             <div className="linhas w-min">{aluno.turma.id}</div>
             <div>
                 <div>
-                    <div className="linhas w-28 flex gap-2" onClick={() => setMostrarN(!mostrarNotas)}>
+                    <div className="linhas w-28 flex gap-2" id="mostrar" onClick={e => e.target.id == "mostrar" && setMostrarN(!mostrarNotas)}>
                         Notas
                         <button className="botao" onClick={() => { postNota(aluno) }}>
                             <Image className="invert" width={12} height={12} alt="adicionar" src="/mais.png" />

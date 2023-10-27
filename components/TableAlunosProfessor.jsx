@@ -17,7 +17,7 @@ export default  function TableAlunosProfessor({ professor, atualizar }) {
     return (
         <div className="tabela">
             <div className="titulo">Alunos</div>
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col gap-1 scroll">
                 {alunos.map(aluno => {
                     return <AlunoDaTurma key={aluno.id} atualizar={() => atualizar()} aluno={aluno} professor={professor} />
                 })}

@@ -1,4 +1,4 @@
-import GetAllData from "@/pages/api/hello";
+import GetAllData from  "@/api/api";
 import alunosDaTurma from "@/data/alunosDaTurma";
 
 export default async function get(disciplina) {

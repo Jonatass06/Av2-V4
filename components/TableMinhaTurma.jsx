@@ -19,7 +19,7 @@ export default function TableMinhaTurma({ turma }) {
             <div>
                 {
                     turma != undefined &&
-                    <div className="flex flex-col gap-1">
+                    <div className="flex flex-col gap-1 scroll">
                         {alunos.map(aluno => {
                             return <div key={aluno.id} className="linhas">
                                 <div>{aluno.nome}</div>
