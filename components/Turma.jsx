@@ -98,11 +98,11 @@ export default function Turma({ turmaData, professor, atualizar }) {
             <button className="relatorio min-h-full flex justify-center items-center w-32" onClick={() => verRelatorio()}>
                 <Image className="invert" width={32} height={32} alt="relatorio" src="/relatorio.png" />
             </button>
-            {relatorio && (alunos.length > 0 ? professor ? <BoletimProfessor professor={professor} turma={turma} fechar={() => setRelatorio(false)}></BoletimProfessor>
+            {relatorio && (alunos.length > 0 && professor ? <BoletimProfessor professor={professor} turma={turma} fechar={() => setRelatorio(false)}></BoletimProfessor>
                 : <div className="h-3/4 gap-6 overflow-clip">
                     <BoletinsSecretario alunosData={alunos} fechar={() => setRelatorio(false)} />
                 </div>
-                :
+                &&
                 <Erro mensagem={"Essa turma não tem alunos vinculados!"} condicao={alunos.length == 0} fechar={() => setRelatorio(false)} />)
             }
 

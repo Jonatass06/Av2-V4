@@ -10,9 +10,9 @@ export default function ModalLogin() {
     const [erro, setErro] = useState(false)
 
     const router = useRouter();
-    async function logar() {
+    function logar() {
         try {
-            let usuario = await GetDataBy(nome + "/" + senha, "usuario/nome/senha");
+            let usuario = GetDataBy(nome + "/" + senha, "usuario/nome/senha");
             document.cookie = "logado=" + usuario.id + ";max-age=max-age-in-seconds:" + 60 * 60 * 24 * 3;
             router.push('/usuario/' + usuario.id);
 
@@ -20,9 +20,6 @@ export default function ModalLogin() {
             setErro(true)
         }
     }
-
-
-
 
     return (
         <div className="w-[700px] h-[650px] bg-white shadow-10b ronded-[5px] flex flex-col justify-center items-center  gap-12">

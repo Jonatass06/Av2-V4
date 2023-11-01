@@ -12,7 +12,7 @@ export default  function Header({id}) {
         <>
             <header className="w-full bg-verde h-[60px] flex justify-between items-center">
                 <div className="w-[88%] h-full flex ml-5 justify-start gap-5 items-center">
-                    <Image width={48} height={48} alt="Logo" src="/logoAv2.svg" />
+                    <Image width={48} height={48} src="/logoAv2.svg" />
                     <h2 className="text-branco font-chivo font-bold">Arnaldo Vieira II</h2>
                 </div>
                 <Image alt="Usuario"  width={48} height={48} className="flex justify-end mr-5 invert" src="/user-icon.png"  onClick={()=>setMostrarModal(!mostrarModal)}/>

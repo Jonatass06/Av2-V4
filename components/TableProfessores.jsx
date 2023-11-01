@@ -3,19 +3,18 @@ import ModalCadastro from "./ModalCadastro"
 import DisciplinaProfessor from "./DisciplinaProfessor"
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import disciplinasNaoProfData from "@/data/disciplinasSemProfessor";
 
 export default  function TableProfessores({ professores, atualizar }) {
 
     const [mostrarCadastro, setMostrarCadastro] = useState(false);
-    const [disciplinas, setDisciplnas] = useState([]);
+    let disciplinas = [];
 
     useEffect(() => {
         async function setDisciplinas(){
             let discipinasTemp = await GetAllData("disciplina");
-            setDisciplnas(discipinasTemp)
+            disciplinas = discipinasTemp
         }
-        setDisciplinas(0)
+        setDisciplinas()
     }, [professores,  atualizar])
 
     function post(obj) {

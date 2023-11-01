@@ -47,7 +47,7 @@ export default function User() {
         <RotaPrivada id={id}>
             <Header id={id}></Header>
             {
-                isAluno &&
+                !isAluno &&
                 <TelaAluno alunoData={usuario}></TelaAluno>
             }
             {
