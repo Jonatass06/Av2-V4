@@ -55,6 +55,7 @@ export default function ConfigsUser() {
             usuario.endereco = endereco;
             await PutData(usuario, tabela)
         } catch (erro) {
+            console.log(erro)
             setMessage("Já existe um usuário com esse nome cadastrado!")
             setErro(true)
         }

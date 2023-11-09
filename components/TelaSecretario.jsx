@@ -34,6 +34,7 @@ export default function TelaSecretario({ secretarioData }) {
         setSecretarios(await GetAllData("secretario"));
         setDisciplinas(await GetAllData("disciplina"));
         setTurmas(await GetAllData("turma"))
+
     }
 
     return (

@@ -6,15 +6,19 @@ export default  function TableAlunosProfessor({ professor, atualizar }) {
     const [alunos, setAlunos] = useState([])
     useEffect(() => {
         if (professor == undefined) return
-         function alunos() {
-            let alunosData = professor.disciplina == null ? [] : alunosDoProfessor( professor.disciplina)
+        console.log("Im")
+        async function alunos() {
+            console.log(professor.disciplina)
+            let alunosData = professor.disciplina == null ? [] : await alunosDoProfessor( professor.disciplina)
+            console.log(alunosData)
             setAlunos(alunosData)
         }
+
         alunos()
-    }, [])
+    }, [professor, atualizar])
 
 
-    return (
+    return (    
         <div className="tabela">
             <div className="titulo">Alunos</div>
             <div className="flex flex-col gap-1 scroll">

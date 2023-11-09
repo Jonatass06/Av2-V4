@@ -20,6 +20,7 @@ export default function TableTurmas (props) {
         setTurmas(await GetAllData("turma"))
         props.atualizar()
     }
+    
     async function deletar(turma) {
         await DeleteData(turma.id, "turma");
         setTurmas(await GetAllData("turma"));

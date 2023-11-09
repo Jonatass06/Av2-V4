@@ -8,10 +8,13 @@ export default function DisciplinaProfessor({ professor, disciplinas, atualizar 
     const[disciplinasFilter, setDisciplinasFilter] = useState([])
 
     useEffect(() => {
+        console.log(disciplinas)
         async function getDisciplinas (){
             setDisciplinasFilter(await disciplinasNaoProf())
+
+
         }
-        getDisciplinas()
+            getDisciplinas()
     }, [disciplinas])
 
     async function put(professor, value) {

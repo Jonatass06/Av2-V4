@@ -7,12 +7,11 @@ import Image from "next/image";
 export default  function TableProfessores({ professores, atualizar }) {
 
     const [mostrarCadastro, setMostrarCadastro] = useState(false);
-    let disciplinas = [];
+    const [disciplinas, setDisciplinas1] = useState([])
 
     useEffect(() => {
         async function setDisciplinas(){
-            let discipinasTemp = await GetAllData("disciplina");
-            disciplinas = discipinasTemp
+            setDisciplinas1(await GetAllData("disciplina"));
         }
         setDisciplinas()
     }, [professores,  atualizar])

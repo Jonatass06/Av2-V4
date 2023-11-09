@@ -1,4 +1,4 @@
-import GetAllData, { GetDataBy } from  "@/api/api";
+import GetAllData, { GetDataBy } from "@/api/api";
 import Header from "@/components/Header";
 import RotaPrivada from "@/components/RotaPrivada"
 import { useRouter } from "next/router";
@@ -19,9 +19,9 @@ export default function User() {
     useEffect(() => {
         async function getUsuario() {
             if (id == undefined) return
-            try{
+            try {
                 await setListas(id)
-            }catch(erro){
+            } catch (erro) {
                 router.push("/login")
             }
 
@@ -47,7 +47,7 @@ export default function User() {
         <RotaPrivada id={id}>
             <Header id={id}></Header>
             {
-                !isAluno &&
+                isAluno &&
                 <TelaAluno alunoData={usuario}></TelaAluno>
             }
             {

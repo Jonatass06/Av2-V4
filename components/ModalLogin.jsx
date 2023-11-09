@@ -10,13 +10,15 @@ export default function ModalLogin() {
     const [erro, setErro] = useState(false)
 
     const router = useRouter();
-    function logar() {
+    async function logar() {
         try {
-            let usuario = GetDataBy(nome + "/" + senha, "usuario/nome/senha");
+            let usuario = await GetDataBy(nome + "/" + senha, "usuario/nome/senha");
+            console.log(usuario)
             document.cookie = "logado=" + usuario.id + ";max-age=max-age-in-seconds:" + 60 * 60 * 24 * 3;
             router.push('/usuario/' + usuario.id);
 
         } catch (error) {
+
             setErro(true)
         }
     }

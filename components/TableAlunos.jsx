@@ -25,7 +25,10 @@ export default function TableAlunos({ alunos, turmas, atualizar }) {
                 {alunos.map(aluno => {
                     return <div key={aluno.id} className="flex gap-1">
                         <div className="linhas w-full">{aluno.nome}</div>
-                        <select className="linhas w-min" value={aluno.turma == null ? "" : aluno.turma.id } onChange={e => put(aluno, e.target.value)}>
+                        <select className="linhas w-min" value={aluno.turma == null ? "" : aluno.turma.id } onChange={e =>{
+                            console.log(e.target.value)
+put(aluno, e.target.value)
+                        } }>
                             <option value={null} >N/A</option>
                             {turmas.map(turma => {
                                 return <option key={turma.id} value={turma.id}>{turma.id}</option>
